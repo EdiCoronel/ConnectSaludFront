@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    const username = this.myform.value.username;
+
     console.log(this.myform.value);
     this.authService.login( this.f['username'].value, this.f['password'].value )
     .pipe(first())
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         console.log(data.token);
         this.authStateService.setToken(data.token);
-        alert(`Bienvenido ${this.f['username'].value}!`);
+        alert('Bienvenido ' + username + ' !!!');
       },
       error => {
         console.log(error);
