@@ -11,8 +11,6 @@
   <div *ngIf="updateError">Error al actualizar el perfil.</div>
 
   <div *ngIf="!editing">
-    <p>Nombre: {{ profile?.name }}</p>
-    <p>Email: {{ profile?.email }}</p>
     <button (click)="startEdit()">Editar</button>
   </div>
 
