@@ -6,14 +6,15 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+
 export class PerfilComponent implements OnInit {
-  profile: any = {};  // Inicializa el objeto para evitar errores de undefined
+  profile: any;
   isLoading: boolean = false;
   updateSuccess: boolean = false;
   updateError: boolean = false;
   editing: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService ) { }
 
   ngOnInit(): void {
     this.loadProfile();
@@ -23,28 +24,31 @@ export class PerfilComponent implements OnInit {
     this.isLoading = true;
     this.userService.getUser().subscribe(
       response => {
-        this.profile = response; // Asegúrate de que la estructura de 'response' coincide con el objeto 'profile'
+        this.profile = response;
         this.isLoading = false;
       },
       error => {
-        console.error("Error loading profile:", error);
+        console.log(error);
         this.isLoading = false;
       }
     );
   }
 
-  saveChanges(): void {
+  updateProfile(): void {
+    this.isLoading = true;
+    this.updateSuccess = false;
+    this.updateError = false;
+
     this.userService.updateProfile(this.profile).subscribe(
       response => {
         this.profile = response;
-        this.updateSuccess = true;
-        this.editing = false;
         this.isLoading = false;
+        this.updateSuccess = true;
       },
       error => {
-        console.error("Error updating profile:", error);
-        this.updateError = true;
+        console.log(error);
         this.isLoading = false;
+        this.updateError = true;
       }
     );
   }
@@ -56,4 +60,25 @@ export class PerfilComponent implements OnInit {
   cancelEdit(): void {
     this.editing = false;
   }
+
+  saveChanges(): void {
+    this.isLoading = true;
+    this.updateSuccess = false;
+    this.updateError = false;
+
+    this.userService.updateProfile(this.profile).subscribe(
+      response => {
+        this.profile = response;
+        this.isLoading = false;
+        this.updateSuccess = true;
+        this.editing = false; // Salir del modo de edición después de guardar los cambios
+      },
+      error => {
+        console.log(error);
+        this.isLoading = false;
+        this.updateError = true;
+      }
+    );
+  }
 }
+
