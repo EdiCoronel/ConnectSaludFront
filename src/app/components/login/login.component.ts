@@ -40,12 +40,10 @@ export class LoginComponent implements OnInit {
         console.log(data);
         console.log(data.token);
         this.authStateService.setToken(data.token);
-        this.welcomeMessage = `Bienvenido, ${this.f['username'].value}!`;
-        alert('El usuario ' + this.f['username'].value + ' ha sido creado');
+        alert(`Bienvenido ${this.f['username'].value}!`);
       },
       error => {
         console.log(error);
-        this.welcomeMessage = '';
       }
     )
   }
