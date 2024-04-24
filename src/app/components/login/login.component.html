@@ -8,11 +8,6 @@
             <h3>Log In</h3>
         </div>
 
-        <!-- Mensaje de Bienvenida -->
-
-        <div *ngIf="welcomeMessage" class="alert alert-success">
-            {{ welcomeMessage }}
-        </div>
     
         <!-- Login Form -->
     <form [formGroup]="myform" (ngSubmit)="onSubmit(); myform.valid?myform.reset(): null">
@@ -20,6 +15,12 @@
         <input  type="text" formControlName="password" id="password" class="fadeIn second" name="login" placeholder="Password">
         <button  type="submit" class="btn btn-warning btn-block">Login</button>
     </form>
+
+    <!-- Mensaje de Bienvenida -->
+
+    <div *ngIf="welcomeMessage" class="alert alert-success">
+        {{ welcomeMessage }}
+    </div>
 
     <!-- Remind Passowrd -->
         <div id="formFooter">
