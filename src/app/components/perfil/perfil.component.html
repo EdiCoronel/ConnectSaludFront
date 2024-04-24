@@ -1,47 +1,26 @@
 
-<section class="container">
-    <h2>Perfil de Usuario</h2>
+<!-- perfil.component.html -->
+<div *ngIf="isLoading">Cargando...</div>
+<div *ngIf="!isLoading">
+  <div *ngIf="updateSuccess">Perfil actualizado con éxito.</div>
+  <div *ngIf="updateError">Error al actualizar el perfil.</div>
 
-    <div *ngIf="isLoading">
-        <p>Cargando perfil...</p>
-    </div>
+  <div *ngIf="!editing">
+    <p>Nombre: {{ profile?.name }}</p>
+    <p>Email: {{ profile?.email }}</p>
+    <button (click)="startEdit()">Editar</button>
+  </div>
 
-    <div *ngIf="!isLoading && profile">
-        <p><strong>Nombre de usuario:</strong> {{ profile.username }}</p>
-        <p><strong>Email:</strong> {{ profile.email }}</p>
+  <div *ngIf="editing">
+    <form (ngSubmit)="saveChanges()">
+      <label for="name">Nombre:</label>
+      <input id="name" [(ngModel)]="profile.name" name="name">
 
-    <div *ngIf="updateSuccess" class="success-message">
-        Perfil actualizado correctamente.
-    </div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" [(ngModel)]="profile.email" name="email">
 
-    <div *ngIf="updateError" class="error-message">
-        Ha ocurrido un error al actualizar el perfil.
-    </div>
-
-    <div>
-        <button type="button" (click)="updateProfile()">Editar perfil</button>
-    </div>
-
-    <div *ngIf="editing">
-        <!-- Formulario de edición de datos del usuario -->
-        <form (ngSubmit)="saveChanges()">
-        <label>
-            Nombre de usuario:
-            <input type="text" [(ngModel)]="profile.username" name="username">
-        </label>
-
-        <label>
-            Email:
-            <input type="email" [(ngModel)]="profile.email" name="email">
-        </label>
-
-        <button type="submit">Guardar cambios</button>
-        <button type="button" (click)="cancelEdit()">Cancelar</button>
-        </form>
-    </div>
-    </div>
-
-    <div *ngIf="!isLoading && !profile">
-    <p>No se ha encontrado información del perfil. Por favor, inicia sesión.</p>
-    </div>
-</section>
+      <button type="submit">Guardar cambios</button>
+      <button type="button" (click)="cancelEdit()">Cancelar</button>
+    </form>
+  </div>
+</div>
