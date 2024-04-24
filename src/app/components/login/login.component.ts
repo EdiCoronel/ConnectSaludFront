@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         console.log(data.token);
         this.authStateService.setToken(data.token);
-        alert('Bienvenido ' + username + ' !!!');
+        alert('Bienvenido ' + username + '!!!');
       },
       error => {
         console.log(error);
