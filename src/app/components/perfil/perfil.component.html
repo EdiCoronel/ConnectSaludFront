@@ -3,13 +3,16 @@
 
 <!-- perfil.component.html -->
 <div *ngIf="isLoading">Cargando...</div>
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading && profile">
+    <p><strong>Nombre de usuario:</strong> {{ profile.username }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+
   <div *ngIf="updateSuccess">Perfil actualizado con éxito.</div>
   <div *ngIf="updateError">Error al actualizar el perfil.</div>
 
-  <div *ngIf="!editing&& profile">
-    <p><strong>Nombre de usuario:</strong> {{ profile.username }}</p>
-    <p><strong>Email:</strong> {{ profile.email }}</p>
+  <div *ngIf="!editing">
+    <p>Nombre: {{ profile?.name }}</p>
+    <p>Email: {{ profile?.email }}</p>
     <button (click)="startEdit()">Editar</button>
   </div>
 
