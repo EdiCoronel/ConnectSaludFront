@@ -7,6 +7,12 @@
             <img src="./assets/img/connect_salud.png" id="icon" alt="User Icon" />
             <h3>Log In</h3>
         </div>
+
+        <!-- Mensaje de Bienvenida -->
+
+        <div *ngIf="welcomeMessage" class="alert alert-success">
+            {{ welcomeMessage }}
+        </div>
     
         <!-- Login Form -->
     <form [formGroup]="myform" (ngSubmit)="onSubmit(); myform.valid?myform.reset(): null">

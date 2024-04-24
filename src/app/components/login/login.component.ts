@@ -16,6 +16,7 @@ import { AuthStateService } from '../../services/auth-state.service';
 export class LoginComponent implements OnInit {
   
   myform: FormGroup;
+  welcomeMessage: string;
 
   constructor( private authService: AuthService, private authStateService: AuthStateService ) {}
 
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         console.log(data.token);
         this.authStateService.setToken(data.token);
+        this.welcomeMessage = `Bienvenido, ${this.f['username'].value}!`;
       },
       error => {
         console.log(error);
