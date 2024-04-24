@@ -23,19 +23,21 @@ export class PerfilComponent implements OnInit {
   loadProfile(): void {
     this.isLoading = true;
     this.userService.getUser().subscribe(
-      (data) => {
-        this.profile = data;
+      response => {
+        this.profile = response;
         this.isLoading = false;
       },
-      (error) => {
-        console.error('Error al cargar el perfil', error);
+      error => {
+        console.log(error);
         this.isLoading = false;
       }
     );
   }
 
   updateProfile(): void {
-    this.editing = true;
+    this.isLoading = true;
+    this.updateSuccess = false;
+    this.updateError = false;
 
     this.userService.updateProfile(this.profile).subscribe(
       response => {
@@ -60,19 +62,22 @@ export class PerfilComponent implements OnInit {
   }
 
   saveChanges(): void {
+    this.isLoading = true;
+    this.updateSuccess = false;
+    this.updateError = false;
 
     this.userService.updateProfile(this.profile).subscribe(
-      (data) => {
+      response => {
+        this.profile = response;
+        this.isLoading = false;
         this.updateSuccess = true;
-        this.editing = false;
-        // Actualizar datos del perfil si es necesario
+        this.editing = false; // Salir del modo de edición después de guardar los cambios
       },
-      (error) => {
-        console.error('Error al actualizar el perfil', error);
+      error => {
+        console.log(error);
+        this.isLoading = false;
         this.updateError = true;
       }
     );
   }
 }
-  
-
