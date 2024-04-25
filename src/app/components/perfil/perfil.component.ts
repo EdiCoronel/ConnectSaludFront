@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class PerfilComponent implements OnInit {
-  profile: any;
+  profile: any = {};
   isLoading: boolean = false;
   updateSuccess: boolean = false;
   updateError: boolean = false;
@@ -23,62 +23,42 @@ export class PerfilComponent implements OnInit {
   loadProfile(): void {
     this.isLoading = true;
     this.userService.getUser().subscribe(
-      response => {
-        this.profile = response;
+      data => {
+        this.profile = data;
         this.isLoading = false;
       },
       error => {
-        console.log(error);
+        console.error('Error al cargar el perfil', error);
         this.isLoading = false;
       }
     );
   }
 
-  updateProfile(): void {
-    this.isLoading = true;
-    this.updateSuccess = false;
-    this.updateError = false;
-
-    this.userService.updateProfile(this.profile).subscribe(
-      response => {
-        this.profile = response;
-        this.isLoading = false;
-        this.updateSuccess = true;
-      },
-      error => {
-        console.log(error);
-        this.isLoading = false;
-        this.updateError = true;
-      }
-    );
+  updateProfile() {
+    this.editing = true;
   }
 
   startEdit(): void {
     this.editing = true;
   }
 
-  cancelEdit(): void {
+  cancelEdit() {
     this.editing = false;
+    this.loadProfile(); // Recargar los datos originales si se cancela la edición
   }
 
-  saveChanges(): void {
-    this.isLoading = true;
-    this.updateSuccess = false;
-    this.updateError = false;
-
-    this.userService.updateProfile(this.profile).subscribe(
-      response => {
-        this.profile = response;
-        this.isLoading = false;
+  saveChanges() {
+    this.userService.updateProfile(this.profile).subscribe({
+      next: (data) => {
         this.updateSuccess = true;
-        this.editing = false; // Salir del modo de edición después de guardar los cambios
+        this.editing = false;
+        // Actualizar datos del perfil si es necesario
       },
-      error => {
-        console.log(error);
-        this.isLoading = false;
+      error: (error) => {
+        console.error('Error al actualizar el perfil', error);
         this.updateError = true;
       }
-    );
+    });
   }
 }
 
