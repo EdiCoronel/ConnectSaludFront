@@ -5,36 +5,23 @@
         <p>Cargando perfil...</p>
     </div>
 
-    <div *ngIf="!isLoading && profile">
-        <p><strong>Nombre de usuario:</strong> {{ profile.username }}</p>
-        <p><strong>Email:</strong> {{ profile.email }}</p>
+    <div *ngIf="!isLoading">
+        <button type="button" (click)="startEdit()">Editar perfil</button>
 
-        <div *ngIf="updateSuccess" class="success-message">
-            Perfil actualizado correctamente.
-        </div>
+        <!-- Formulario de edición de datos del usuario, se muestra sólo cuando se está editando -->
+        <form [formGroup]="profileForm" (ngSubmit)="saveChanges()" *ngIf="profileForm && editing">
+            <label>
+                Nombre de usuario:
+                <input type="text" formControlName="username">
+            </label>
 
-        <div *ngIf="updateError" class="error-message">
-            Ha ocurrido un error al actualizar el perfil.
-        </div>
+            <label>
+                Email:
+                <input type="email" formControlName="email">
+            </label>
 
-        <button type="button" (click)="editing = true">Editar perfil</button>
-
-        <div *ngIf="editing">
-            <!-- Formulario de edición de datos del usuario -->
-            <form (ngSubmit)="saveChanges()">
-                <label>
-                    Nombre de usuario:
-                    <input type="text" [(ngModel)]="profile.username" name="username">
-                </label>
-
-                <label>
-                    Email:
-                    <input type="email" [(ngModel)]="profile.email" name="email">
-                </label>
-
-                <button type="submit">Guardar cambios</button>
-                <button type="button" (click)="cancelEdit()">Cancelar</button>
-            </form>
-        </div>
+            <button type="submit" [disabled]="!profileForm.valid">Guardar cambios</button>
+            <button type="button" (click)="cancelEdit()">Cancelar</button>
+        </form>
     </div>
 </section>
