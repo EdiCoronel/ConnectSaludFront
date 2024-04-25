@@ -29,6 +29,10 @@ export class UserService {
 
   updateProfile(profileData: any): Observable<any> {
     const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found!');
+    }
+    
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
