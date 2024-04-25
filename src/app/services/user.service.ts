@@ -13,23 +13,25 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders() {
+  getHeaders() {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`  // Usamos Bearer consistentemente si el servidor lo soporta
+      Authorization: `Token ${token}`,
     });
   }
 
-  getUser(): Observable<any> {
-    return this.http.get<any>(`${this.api_url}api/user/`, {
-      headers: this.getHeaders()
+  getUser() {
+    return this.http.get<any>(this.api_url + 'api/user/', {
+      headers: this.getHeaders(),
     });
   }
 
   updateProfile(profileData: any): Observable<any> {
-    return this.http.put<any>(`${this.api_url}api/user/`, profileData, {
-      headers: this.getHeaders()
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
     });
+    return this.http.put<any>(this.api_url + 'api/user/', profileData, { headers });
   }
 }
