@@ -53,6 +53,7 @@ export class PerfilComponent implements OnInit {
         this.updateSuccess = true;
         this.editing = false;
         // Actualizar datos del perfil si es necesario
+        this.profile = data;
       },
       error: (error) => {
         console.error('Error al actualizar el perfil', error);
