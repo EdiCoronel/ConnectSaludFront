@@ -30,7 +30,9 @@ export class UserService {
   updateProfile(profileData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     });
     return this.http.put<any>(this.api_url + 'api/user/', profileData, { headers });
   }
