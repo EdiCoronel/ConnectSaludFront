@@ -26,7 +26,7 @@ export class CarritoComponent implements OnInit {
     
     this.httpclient.post<any>(createPaymentUrl, {}).subscribe(response => {
       const paymentUrl = response.payment_url;
-      window.location.href = paymentUrl; // Redirigir directamente utilizando el objeto window
+      window.open(paymentUrl, '_blank'); // Abrir en una nueva pestaña
       // O utilizar el enrutador de Angular
       // this.router.navigateByUrl(paymentUrl);
     });
