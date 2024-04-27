@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthStateService } from 'src/app/services/auth-state.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class InicioComponent {
 
+  isLoggedIn = false;
+
+  constructor(private authService: AuthStateService) {
+      this.isLoggedIn = this.authService.isUserLoggedIn();
+  }
 }
+

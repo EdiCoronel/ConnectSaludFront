@@ -172,4 +172,26 @@
             </div>
         </div>
     </section>
+    </div>
+    </section>
 <!-- Fin Misión, Visión y Valores -->
+
+<!-- Descarga de App -->
+<section *ngIf="isLoggedIn" class="container px-4 py-5" id="download-app">
+    <div class="download-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Descarga Nuestra App</h1>
+        <p class="fs-5 text-muted">Accede a nuestros servicios directamente desde tu teléfono móvil.</p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 d-flex justify-content-around">
+            <a href="https://play.google.com/store/apps/details?id=tu.id.de.app" target="_blank" class="app-download-button">
+                <img src="/assets/img/google-play-badge.png" alt="Disponible en Google Play" style="height: 60px;">
+            </a>
+            <a href="https://apps.apple.com/app/idtu.id.de.app" target="_blank" class="app-download-button">
+                <img src="/assets/img/app-store-badge.png" alt="Descargar en Apple App Store" style="height: 50px;">
+            </a>
+        </div>
+    </div>
+</section>
+
+
