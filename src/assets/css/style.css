@@ -218,6 +218,12 @@ img {
 #parrafo {
     text-align: center;
     margin: 50px;
-
-
 }
+
+@media (max-width: 600px) {
+    .container .row {
+        padding: 10px;
+    }
+}
+
+

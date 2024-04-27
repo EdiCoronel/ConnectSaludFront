@@ -7,8 +7,10 @@ export class CartService {
 
   private products: any[] = [
     { name: 'Basico', price:  1000, image: '../assets/img/Basico.png' },
+    { name: 'Basico', price:  1000, image: '../assets/img/Basico.png' },
     { name: 'Intermedio', price:  1500, image: '../assets/img/Intermedio.png' },
-    { name: 'Avanzado', price:  3000, image: '../assets/img/Intensivo.png' }
+    { name: 'Avanzado', price:  3000, image: '../assets/img/Intensivo.png' },
+    { name: 'Avanzado', price:  3000, image: '../assets/img/Intensivo.png' },
   ];
   
 
