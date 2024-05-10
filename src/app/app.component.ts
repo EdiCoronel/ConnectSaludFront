@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, HostListener, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'ConnetSalud';
+  title = 'ConnectSalud';
 
-  constructor() { }
+  constructor(private authService: AuthService) {}
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadHandler(event: Event) {
+    this.authService.logout();
+  }
   
 }
 
