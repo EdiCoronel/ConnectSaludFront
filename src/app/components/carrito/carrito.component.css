@@ -56,9 +56,9 @@ tr.selected {
   th, td {
     padding: 5px;
     text-align: center;
-}
+  }
 
-.container {
+  .container {
   padding: 20px;
-}
+  }
 }
