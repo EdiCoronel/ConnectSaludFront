@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log(error);
-        alert('No tienes acceso')
+        alert('Usuario o contraseña incorrectos. Intente nuevamente.')
       }
     )
   }
